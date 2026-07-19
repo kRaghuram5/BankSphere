@@ -8,10 +8,9 @@ public class Main {
         bank.addBranch("Mysuru", "BKS0001", "Mysore");
         bank.addBranch("Banglore", "BKS0002", "Banglore");
         bank.addBranch("Manglore", "BKS0003", "Manglore");
-        bank.displayBankinfo();
-        bank.displayBranch();
-
-        System.out.println(bank.totalBranch);
-
+        bank.displayBankInfo();
+        bank.displayBranch("BKS0002");
+        System.out.println(bank.getTotalBranch());
+        
     }
 }
