@@ -14,14 +14,13 @@ public class Branch {
         return IFSC;
     }
 
-    public void displayBranch(){
-        System.out.println("========================\nBranch INFORMATION \n========================");
-        System.out.println("Branch Name : "+branchName);
-        System.out.println("Branch IFSC : "+IFSC);
-        System.out.println("Address : "+address);
-        System.out.println("========================");
+    @Override
+    public String toString() {
+        return "Branch: \n ========================\n" +
+                "branchName='" + branchName + '\n' +
+                ", IFSC='" + IFSC + '\n' +
+                ", address='" + address + '\n' +
+                "========================";
     }
-
-
 }
 

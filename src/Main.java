@@ -4,17 +4,26 @@ import bank.Bank;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        int[] a = new int[4];
+        //Add Bank
         Bank bank1 = new Bank("BS001","BankSphere","Mysuru",2026);
-        bank1.addBranch("Mysuru", "BKS0001", "Mysore");
-        bank1.addBranch("Banglore", "BKS0002", "Banglore");
-        bank1.addBranch("Manglore", "BKS0003", "Manglore");
-        bank1.displayBankInfo();
-        bank1.displayAllBranch();
-        System.out.println(bank1.getTotalBranch());
         Bank bank2 = new Bank("BS002","BankSphere","Chennai",2026);
-        bank2.displayBankInfo();
-        System.out.println(Bank.getTotalBanksCreated());
-        Bank.showTotalBanks();
+
+        //Add Branch
+        bank1.addBranch("Mysuru", "BKS0001", "JPnagar,Mysore");
+        bank1.addBranch("Banglore", "BKS0002", "Vpuram,Banglore");
+        bank2.addBranch("Chennai", "BTN0001", "Egmore,Chennai");
+        //Display Bank
+        System.out.println(bank1);
+        System.out.println(bank2);
+        System.out.println(Bank.getTotalBanksCreated()); //Bank.showTotalBanks();
+
+        //Display Branch
+        bank1.displayAllBranch();
+        bank2.displayAllBranch();
+        System.out.println(bank1.getTotalBranch());
+
+
+
+
     }
 }

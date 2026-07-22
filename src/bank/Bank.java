@@ -22,14 +22,15 @@ public class Bank {
         return totalBanksCreated;
     }
 
-    public void displayBankInfo(){
-        System.out.println("========================\nBANK INFORMATION \n========================");
-        System.out.println("Bank Name : "+bankName);
-        System.out.println("Bank Id : "+bankId);
-        System.out.println("HeadOffice : "+headOffice);
-        System.out.println("Established : "+established_year);
-        System.out.println("Total Branch : "+ totalBranch);
-        System.out.println("========================");
+    public String toString(){
+        return ("========================\nBANK INFORMATION \n========================" +
+                "\nBank Name : "+bankName +
+                "\nBank Id : "+bankId +
+                "\nHeadOffice : "+headOffice +
+                "\nEstablished : "+established_year +
+                "\nTotal Branch : "+ totalBranch +
+                "\n========================"
+        );
     }
 
     public static void showTotalBanks(){
@@ -43,13 +44,13 @@ public class Bank {
     }
     public void displayAllBranch(){
         for(Branch branch : branches){
-            branch.displayBranch();
+            System.out.println(branch);;
         }
     }
     public void displayBranch(String IFSC){
         for(int i=0;i<totalBranch;i++){
             if(branches.get(i).getIFSC() == IFSC){
-                branches.get(i).displayBranch();
+                System.out.println(branches.get(i));
             }
         }
     }
