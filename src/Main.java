@@ -1,7 +1,6 @@
-import bank.Bank;
+import bank.*;
+import customer.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         //Add Bank
@@ -15,15 +14,29 @@ public class Main {
         //Display Bank
         System.out.println(bank1);
         System.out.println(bank2);
-        System.out.println(Bank.getTotalBanksCreated()); //Bank.showTotalBanks();
+        Bank.showTotalBanks();
 
         //Display Branch
         bank1.displayAllBranch();
         bank2.displayAllBranch();
         System.out.println(bank1.getTotalBranch());
 
+        //Add Customers
+        bank1.addCustomer(1,"Raghu",21,+99_99_99_999,bank1.getBranch("BKS0001"),"Mysuru");
 
+        bank1.displayAllCustomers();
+        Branch branch = bank1.getBranch("BKS0001");
+        branch.displayAllCustomers();
 
+        Person p = new Customer(
+                101,
+                "Raghu",
+                21,
+                9999999999L,
+                bank1.getBranch("BKS0001"),
+                "Mysuru"
+        );
 
+        System.out.println(p);
     }
 }
