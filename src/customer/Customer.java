@@ -3,13 +3,15 @@ package customer;
 import bank.Branch;
 
 public class Customer extends Person {
-    private int customerId;
-    private boolean status;
-    private Branch branch;
-    public Customer(int customerId, String name, int age, long phone, Branch branch, String address){
+    private final String customerId;
+    private String status;
+    private final Branch branch;
+    private static int totalCustomersCreated =0;
+    public Customer( String name, int age, long phone, Branch branch, String address){
         super(name,age,phone,address);
-        this.customerId=customerId;
-        this.status=true;
+        totalCustomersCreated++;
+        this.customerId="CID"+ totalCustomersCreated;
+        this.status="ACTIVE";
         this.branch = branch;
     }
 
@@ -18,20 +20,24 @@ public class Customer extends Person {
         return "Customer{" +
                 "customerId=" + customerId +
                 super.toString() +
-                branch.toString() +
+                branch.getBranchSummary() +
                 ", status=" + status +
                 '}';
     }
 
-    public int getCustomerId(){
+    public Branch getBranch(){
+        return branch;
+    }
+
+    public String getCustomerId(){
         return customerId;
     }
 
-    public boolean getStatus(){
+    public String getStatus(){
         return status;
     }
 
-    public void setStatus() {
-        status=false;
+    public void setStatus(String status) {
+        this.status=status;
     }
 }
