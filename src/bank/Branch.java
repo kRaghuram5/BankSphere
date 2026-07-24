@@ -1,6 +1,7 @@
 package bank;
 
 
+import account.*;
 import customer.*;
 
 public class Branch {
@@ -11,6 +12,8 @@ public class Branch {
     private final Customer[] customers;
     private int customerCount;
 
+    private Account[] accounts;
+    private int accountCount;
 
     public Branch(String branchName,String IFSC,String address, Bank bank){
         this.branchName = branchName;
@@ -19,6 +22,9 @@ public class Branch {
         this.bank = bank;
         customers = new Customer[50];
         customerCount=0;
+
+        accountCount =0;
+        accounts = new Account[100];
     }
 
     public String getIFSC() {
@@ -35,7 +41,7 @@ public class Branch {
                 "========================";
     }
     public String getBranchSummary(){
-        return "Branch : " + branchName + " - ( " + IFSC + " )\n Bank: " + bank.getBankName();
+        return "Branch : " + branchName + " - ( " + IFSC + " )\nBank: " + bank.getBankName();
     }
 
     public void addCustomer(Customer customer){
@@ -44,7 +50,12 @@ public class Branch {
     public void displayAllCustomers(){
         for(int i=0;i<customerCount;i++){
             System.out.println(customers[i]);
+            System.out.println();
         }
+    }
+
+    public void addAccount(Account account){
+        accounts[accountCount++] = account;
     }
 
     public Bank getBank(){

@@ -1,5 +1,6 @@
 package bank;
-import customer.Customer;
+import account.*;
+import customer.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,9 @@ public class Bank {
     private final Customer[] customers;
     private int customerCount;
 
+    private final Account[] accounts;
+    private int accountCount;
+
     public Bank(String bankId, String bankName, String headOffice, int year){
         bankCount++;
         established_year=year;
@@ -27,6 +31,9 @@ public class Bank {
 
         customerCount=0;
         customers = new Customer[100];
+
+        accountCount = 0;
+        accounts = new Account[100];
     }
 
     //Current Bank
@@ -100,5 +107,26 @@ public class Bank {
 
     public void removeCustomer(Customer customer){
         customer.setStatus("INACTIVE");
+    }
+
+    //Account
+    public void openAccount(Account account){
+        accounts[accountCount++]= account;
+        account.getBranch().addAccount(account);
+        account.getCustomer().addAccount(account);
+    }
+
+    public void displayAllAccounts(){
+        for(int i=0;i<accountCount;i++){
+            accounts[i].displayAccount();
+        }
+    }
+
+    public Account getAccountbyNumber(int id){
+        for(int i=0;i<accountCount;i++){
+            if(accounts[i].getAccountNumber()==id)
+                return accounts[i];
+        }
+        return null;
     }
 }

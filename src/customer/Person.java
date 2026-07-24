@@ -14,8 +14,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "name='" + name + '\n' +
-                ", age=" + age +
+        return "name='" + name + ",\n" +
+                "age=" + age +
                 ", \nphone=" + phone +
                 ", \naddress='" + address ;
     }
