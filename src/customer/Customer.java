@@ -3,13 +3,15 @@ package customer;
 import account.Account;
 import bank.Branch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer extends Person {
     private final String customerId;
     private String status;
     private final Branch branch;
     private static int totalCustomersCreated =0;
-    private final Account[] accounts;
-    private int accountCount;
+    private final List<Account> accounts;
 
     public Customer( String name, int age, long phone, Branch branch, String address){
         super(name,age,phone,address);
@@ -18,8 +20,7 @@ public class Customer extends Person {
         this.status="ACTIVE";
         this.branch = branch;
 
-        accountCount =0;
-        accounts = new Account[100];
+        accounts = new ArrayList<>();
     }
 
     @Override
@@ -48,6 +49,6 @@ public class Customer extends Person {
     }
 
     public void addAccount(Account account){
-        accounts[accountCount++] = account;
+        accounts.add(account);
     }
 }

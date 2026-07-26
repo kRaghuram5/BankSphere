@@ -4,27 +4,25 @@ package bank;
 import account.*;
 import customer.*;
 
+import java.util.*;
+
 public class Branch {
     private final String branchName;
     private final String IFSC;
     private final String address;
     private final Bank bank;
-    private final Customer[] customers;
-    private int customerCount;
+    private final List<Customer> customers;
 
-    private Account[] accounts;
-    private int accountCount;
+    private final List<Account> accounts;
 
     public Branch(String branchName,String IFSC,String address, Bank bank){
         this.branchName = branchName;
         this.IFSC = IFSC;
         this.address = address;
         this.bank = bank;
-        customers = new Customer[50];
-        customerCount=0;
+        customers = new ArrayList<>();
 
-        accountCount =0;
-        accounts = new Account[100];
+        accounts = new ArrayList<>();
     }
 
     public String getIFSC() {
@@ -45,17 +43,17 @@ public class Branch {
     }
 
     public void addCustomer(Customer customer){
-        customers[customerCount++] = customer;
+        customers.add(customer);
     }
     public void displayAllCustomers(){
-        for(int i=0;i<customerCount;i++){
-            System.out.println(customers[i]);
+        for(Customer customer : customers){
+            System.out.println(customer);
             System.out.println();
         }
     }
 
     public void addAccount(Account account){
-        accounts[accountCount++] = account;
+        accounts.add(account);
     }
 
     public Bank getBank(){

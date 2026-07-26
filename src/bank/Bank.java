@@ -12,13 +12,10 @@ public class Bank {
     private final int established_year;
 
     private final List<Branch> branches;
-    private int branchCount;
 
-    private final Customer[] customers;
-    private int customerCount;
+    private final List<Customer> customers;
 
-    private final Account[] accounts;
-    private int accountCount;
+    private final List<Account> accounts;
 
     public Bank(String bankId, String bankName, String headOffice, int year){
         bankCount++;
@@ -28,13 +25,10 @@ public class Bank {
         this.headOffice=headOffice;
 
         branches = new ArrayList<>();
-        branchCount = 0 ;
 
-        customerCount=0;
-        customers = new Customer[100];
+        customers = new ArrayList<>();
 
-        accountCount = 0;
-        accounts = new Account[100];
+        accounts = new ArrayList<>();
     }
 
     //Current Bank
@@ -44,7 +38,7 @@ public class Bank {
                 "\nBank Id : "+bankId +
                 "\nHeadOffice : "+headOffice +
                 "\nEstablished : "+established_year +
-                "\nTotal Branch : "+ branchCount +
+                "\nTotal Branch : "+ branches.size() +
                 "\n========================"
         );
     }
@@ -60,7 +54,6 @@ public class Bank {
     //My Branches
     public void addBranch(Branch branch){
         branches.add(branch);
-        branchCount++;
     }
 
     public void displayAllBranch(){
@@ -70,38 +63,37 @@ public class Bank {
     }
 
     public Branch getBranch(String IFSC){
-        for(int i=0;i<branchCount;i++){
-            if(branches.get(i).getIFSC().equals(IFSC)){
-                return branches.get(i);
+        for(Branch branch : branches){
+            if(branch.getIFSC().equals(IFSC)){
+                return branch;
             }
         }
         return null;
     }
 
     public int getTotalBranches(){
-        return branchCount;
+        return branches.size();
     }
 
     //My Customers
     public void addCustomer(Customer customer){
         if(customer.getBranch()!=null){
-            customers[customerCount] = customer;
+            customers.add(customer);
             customer.getBranch().addCustomer(customer);
-            customerCount++;
         }
     }
 
     public void displayAllCustomers(){
-        for(int i=0;i<customerCount;i++){
-            if(customers[i].getStatus().equals("ACTIVE"))
-                System.out.println(customers[i]);
+        for(Customer customer: customers){
+            if(customer.getStatus().equals("ACTIVE"))
+                System.out.println(customer);
         }
     }
 
     public String getCustomerId(String id){
-        for(int i=0;i<customerCount;i++){
-            if(customers[i].getCustomerId().equals(id))
-                return customers[i].toString();
+        for(Customer customer: customers){
+            if(customer.getCustomerId().equals(id))
+                return customer.toString();
         }
         return "Not Found";
     }
@@ -112,21 +104,21 @@ public class Bank {
 
     //Account
     public void openAccount(Account account){
-        accounts[accountCount++]= account;
+        accounts.add(account);
         account.getBranch().addAccount(account);
         account.getCustomer().addAccount(account);
     }
 
     public void displayAllAccounts(){
-        for(int i=0;i<accountCount;i++){
-            accounts[i].displayAccount();
+        for(Account account:accounts){
+            account.displayAccount();
         }
     }
 
-    public Account getAccountbyNumber (int id) throws AccountNotFoundException {
-        for(int i=0;i<accountCount;i++){
-            if(accounts[i].getAccountNumber()==id)
-                return accounts[i];
+    public Account getAccountByNumber (int id) throws AccountNotFoundException {
+        for(Account account:accounts){
+            if(account.getAccountNumber()==id)
+                return account;
         }
         throw new AccountNotFoundException("Account Not found");
     }
