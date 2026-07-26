@@ -2,6 +2,7 @@ package account;
 
 import bank.*;
 import customer.*;
+import exception.*;
 
 public abstract class Account implements Transaction {
     private final int accountNumber;
@@ -18,9 +19,11 @@ public abstract class Account implements Transaction {
         this.status = "ACTIVE";
     }
 
-    public abstract void deposit(int amount);
+    public abstract void deposit(int amount) throws InvalidAmountException;
 
-    public abstract void withdraw(int amount);
+    public abstract void withdraw(int amount) throws InvalidAmountException, InsufficientBalanceException;
+
+    public abstract void transfer(Account receiver, int amount)throws InvalidAmountException, InsufficientBalanceException;
 
     public abstract void calculateInterest();
 

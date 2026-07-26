@@ -34,10 +34,10 @@ public class Branch {
     @Override
     public String toString() {
         return "Branch: \n ========================\n" +
-                "branchName='" + branchName + '\n' +
-                bank.getBankName() +
-                ", IFSC='" + IFSC + '\n' +
-                ", address='" + address + '\n' +
+                "branchName=" + branchName + ',' +
+                bank.getBankName() + '\n' +
+                "IFSC=" + IFSC + ",\n" +
+                "address=" + address + '\n' +
                 "========================";
     }
     public String getBranchSummary(){

@@ -1,6 +1,7 @@
 package bank;
 import account.*;
 import customer.*;
+import exception.AccountNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,11 +123,11 @@ public class Bank {
         }
     }
 
-    public Account getAccountbyNumber(int id){
+    public Account getAccountbyNumber (int id) throws AccountNotFoundException {
         for(int i=0;i<accountCount;i++){
             if(accounts[i].getAccountNumber()==id)
                 return accounts[i];
         }
-        return null;
+        throw new AccountNotFoundException("Account Not found");
     }
 }

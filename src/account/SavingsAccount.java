@@ -1,6 +1,9 @@
 package account;
 
 import customer.*;
+import exception.AccountNotFoundException;
+import exception.InsufficientBalanceException;
+import exception.InvalidAmountException;
 
 public class SavingsAccount extends Account{
     private final double interestRate;
@@ -10,15 +13,22 @@ public class SavingsAccount extends Account{
         minimumBalance = 1000;
         interestRate = 4.2;
     }
-    public void deposit(int amount){
+    public void deposit(int amount) throws InvalidAmountException {
+        if(amount<=0) throw new InvalidAmountException("Deposit Amount Invalid");
         int temp = amount + getBalance();
         setBalance(temp);
     }
 
-    public void withdraw(int amount){
+    public void withdraw(int amount) throws InvalidAmountException, InsufficientBalanceException {
+        if(amount<=0) throw new InvalidAmountException("Withdraw Amount Invalid");
         int temp = getBalance() - amount;
-        if(temp< minimumBalance) System.out.println("Insufficient balance");
+        if(temp< minimumBalance) throw new InsufficientBalanceException("Low Balance!!, Withdraw Failed");
         else setBalance(temp);
+    }
+
+    public void transfer(Account receiver, int amount) throws InvalidAmountException, InsufficientBalanceException {
+        withdraw(amount);
+        receiver.deposit(amount);
     }
 
     public void calculateInterest(){
