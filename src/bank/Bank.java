@@ -1,7 +1,9 @@
 package bank;
 import account.*;
 import customer.*;
+import enums.CustomerStatus;
 import exception.AccountNotFoundException;
+import exception.CustomerNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,21 +87,21 @@ public class Bank {
 
     public void displayAllCustomers(){
         for(Customer customer: customers){
-            if(customer.getStatus().equals("ACTIVE"))
+            if(customer.getStatus() == CustomerStatus.ACTIVE)
                 System.out.println(customer);
         }
     }
 
-    public String getCustomerId(String id){
+    public String getCustomerId(String id) throws CustomerNotFoundException{
         for(Customer customer: customers){
             if(customer.getCustomerId().equals(id))
                 return customer.toString();
         }
-        return "Not Found";
+        throw new CustomerNotFoundException("Customer Not Found");
     }
 
     public void removeCustomer(Customer customer){
-        customer.setStatus("INACTIVE");
+        customer.setStatus(CustomerStatus.BLOCKED);
     }
 
     //Account

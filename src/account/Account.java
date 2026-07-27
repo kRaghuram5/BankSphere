@@ -3,6 +3,7 @@ package account;
 import bank.*;
 import customer.*;
 import exception.*;
+import enums.*;
 
 public abstract class Account implements Transaction {
     private final int accountNumber;
@@ -10,20 +11,20 @@ public abstract class Account implements Transaction {
     private int balance;
     private final Customer customer;
     private final Branch branch;
-    private final String status;
+    private AccountStatus status;
     public Account(Customer customer, int initialBalance){
         accountNumber = ++totalAccountsCreated;
         balance = initialBalance;
         this.branch = customer.getBranch();
         this.customer = customer;
-        this.status = "ACTIVE";
+        this.status = AccountStatus.ACTIVE;
     }
 
-    public abstract void deposit(int amount) throws InvalidAmountException;
+    public abstract void deposit(int amount) throws InvalidAmountException, AccountInactiveException;
 
-    public abstract void withdraw(int amount) throws InvalidAmountException, InsufficientBalanceException;
+    public abstract void withdraw(int amount) throws InvalidAmountException, InsufficientBalanceException, AccountInactiveException;
 
-    public abstract void transfer(Account receiver, int amount)throws InvalidAmountException, InsufficientBalanceException;
+    public abstract void transfer(Account receiver, int amount)throws InvalidAmountException, InsufficientBalanceException, AccountInactiveException;
 
     public abstract void calculateInterest();
 
@@ -54,4 +55,13 @@ public abstract class Account implements Transaction {
                 "\nStatus : " + status
          );
     }
+
+    public AccountStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AccountStatus status){
+        this.status = status;
+    }
+
 }

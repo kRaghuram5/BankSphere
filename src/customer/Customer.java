@@ -2,13 +2,14 @@ package customer;
 
 import account.Account;
 import bank.Branch;
+import enums.CustomerStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends Person {
     private final String customerId;
-    private String status;
+    private CustomerStatus status;
     private final Branch branch;
     private static int totalCustomersCreated =0;
     private final List<Account> accounts;
@@ -17,7 +18,7 @@ public class Customer extends Person {
         super(name,age,phone,address);
         totalCustomersCreated++;
         this.customerId="CID"+ totalCustomersCreated;
-        this.status="ACTIVE";
+        this.status=CustomerStatus.ACTIVE;
         this.branch = branch;
 
         accounts = new ArrayList<>();
@@ -40,11 +41,11 @@ public class Customer extends Person {
         return customerId;
     }
 
-    public String getStatus(){
+    public CustomerStatus getStatus(){
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CustomerStatus status) {
         this.status=status;
     }
 
