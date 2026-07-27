@@ -2,6 +2,7 @@ package account;
 
 import customer.*;
 import enums.AccountStatus;
+import enums.AccountType;
 import exception.AccountInactiveException;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
@@ -9,9 +10,11 @@ import exception.InvalidAmountException;
 public class SavingsAccount extends Account{
     private final double interestRate;
     private final int minimumBalance;
-    public SavingsAccount( Customer customer, int initialBalance){
-        super(customer,initialBalance);
+    private static int totalSavingAccount = 0;
+    public SavingsAccount(Customer customer, AccountType type, int initialBalance){
+        super(customer,type,initialBalance);
         minimumBalance = 1000;
+        totalSavingAccount++;
         interestRate = 4.2;
     }
     public void deposit(int amount) throws InvalidAmountException, AccountInactiveException {
@@ -40,6 +43,9 @@ public class SavingsAccount extends Account{
                 "\nInterest Rate : " + interestRate + "%\nInterest Earned : " + temp);
     }
 
+    public int showSavingsAccount(){
+        return totalSavingAccount;
+    }
     public double getInterestRate(){
         return interestRate;
     }

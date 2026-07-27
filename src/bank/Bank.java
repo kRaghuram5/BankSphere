@@ -1,6 +1,8 @@
 package bank;
 import account.*;
 import customer.*;
+import enums.AccountStatus;
+import enums.AccountType;
 import enums.CustomerStatus;
 import exception.AccountNotFoundException;
 import exception.CustomerNotFoundException;
@@ -92,10 +94,10 @@ public class Bank {
         }
     }
 
-    public String getCustomerId(String id) throws CustomerNotFoundException{
+    public Customer getCustomerById(String id) throws CustomerNotFoundException{
         for(Customer customer: customers){
             if(customer.getCustomerId().equals(id))
-                return customer.toString();
+                return customer;
         }
         throw new CustomerNotFoundException("Customer Not Found");
     }
@@ -124,4 +126,33 @@ public class Bank {
         }
         throw new AccountNotFoundException("Account Not found");
     }
+
+    public void displayActiveAccounts(){
+        for(Account account:accounts){
+            if(account.getStatus() == AccountStatus.ACTIVE)
+                account.displayAccount();
+        }
+    }
+
+    public void displayBlockedAccounts(){
+        for(Account account:accounts){
+            if(account.getStatus() == AccountStatus.BLOCKED)
+                account.displayAccount();
+        }
+    }
+
+    public void displaySavingAccounts(){
+        for(Account account:accounts){
+            if(account.getAccountType() == AccountType.SAVING_ACCOUNT)
+                account.displayAccount();
+        }
+    }
+
+    public void displayCurrentAccounts(){
+        for(Account account:accounts){
+            if(account.getAccountType() == AccountType.SAVING_ACCOUNT)
+                account.displayAccount();
+        }
+    }
+
 }

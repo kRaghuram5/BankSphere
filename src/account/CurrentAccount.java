@@ -2,14 +2,17 @@ package account;
 
 import customer.Customer;
 import enums.AccountStatus;
+import enums.AccountType;
 import exception.AccountInactiveException;
 import exception.InsufficientBalanceException;
 import exception.InvalidAmountException;
 
 public class CurrentAccount extends Account {
     private final int overdraftLimit;
-    public CurrentAccount(Customer customer, int initialBalance){
-        super(customer,initialBalance);
+    private static int totalCurrentAccount = 0;
+    public CurrentAccount(Customer customer, AccountType type , int initialBalance){
+        super(customer,type,initialBalance);
+        totalCurrentAccount++;
         overdraftLimit = 5000;
     }
     public void deposit(int amount) throws InvalidAmountException, AccountInactiveException {
@@ -29,6 +32,10 @@ public class CurrentAccount extends Account {
     public void transfer(Account receiver, int amount) throws InvalidAmountException, InsufficientBalanceException, AccountInactiveException{
         withdraw(amount);
         receiver.deposit(amount);
+    }
+
+    public int showTotalCurrentAccount(){
+        return totalCurrentAccount;
     }
 
     public void calculateInterest(){

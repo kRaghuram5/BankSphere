@@ -5,18 +5,21 @@ import customer.*;
 import exception.*;
 import enums.*;
 
-public abstract class Account implements Transaction {
+public abstract class Account implements Transaction, Comparable<Account> {
     private final int accountNumber;
     private static int totalAccountsCreated = 0;
     private int balance;
     private final Customer customer;
     private final Branch branch;
     private AccountStatus status;
-    public Account(Customer customer, int initialBalance){
+    private final AccountType type;
+
+    public Account(Customer customer, AccountType type,int initialBalance){
         accountNumber = ++totalAccountsCreated;
         balance = initialBalance;
         this.branch = customer.getBranch();
         this.customer = customer;
+        this.type=type;
         this.status = AccountStatus.ACTIVE;
     }
 
@@ -52,10 +55,13 @@ public abstract class Account implements Transaction {
         System.out.println("==========ACCOUNT INFORMATION==========\nAccount Number : " + accountNumber +
                 "\n" + customer.toString() +
                 "\nBalance : " + balance +
+                "\n Type :" + type +
                 "\nStatus : " + status
          );
     }
-
+    public AccountType getAccountType(){
+        return type;
+    }
     public AccountStatus getStatus() {
         return status;
     }
@@ -64,4 +70,8 @@ public abstract class Account implements Transaction {
         this.status = status;
     }
 
+    @Override
+    public int compareTo(Account other) {
+        return Integer.compare(this.accountNumber, other.accountNumber);
+    }
 }
