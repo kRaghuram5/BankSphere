@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="BankSpherePU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Entities -->
+        <class>com.banksphere.bank.Bank</class>
+        <class>com.banksphere.bank.Branch</class>
+        <class>com.banksphere.customer.Customer</class>
+        <class>com.banksphere.account.Account</class>
+        <class>com.banksphere.account.SavingsAccount</class>
+        <class>com.banksphere.account.CurrentAccount</class>
+        <class>com.banksphere.transaction.Transaction</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <!-- ===== JDBC — values injected by EnvLoader from .env ===== -->
+            <property name="jakarta.persistence.jdbc.driver"   value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"      value="${DB_URL}"/>
+            <property name="jakarta.persistence.jdbc.user"     value="${DB_USERNAME}"/>
+            <property name="jakarta.persistence.jdbc.password" value="${DB_PASSWORD}"/>
+
+            <!-- ===== Hibernate DDL — auto create/update tables ===== -->
+            <property name="hibernate.hbm2ddl.auto"  value="update"/>
+
+            <!-- ===== SQL Logging ===== -->
+            <property name="hibernate.show_sql"    value="true"/>
+            <property name="hibernate.format_sql"  value="true"/>
+
+            <!-- ===== Dialect ===== -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+            <!-- ===== Connection pool (built-in C3P0 basic) ===== -->
+            <property name="hibernate.connection.pool_size" value="5"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
